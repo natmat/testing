@@ -1,4 +1,14 @@
-T(N,i) (0x1 & ((N)>>(i)))
+/*
+First attempt.
+start - set true when first bit==1 encountered
+gap - incremented on each bit==zero
+max - records max gap
+when started, if bit==1 then update max and clear gap
+
+fails: doesn't find enough bits in the input int.
+*/
+
+#define BIT(N,i) (0x1 & ((N)>>(i)))
 
 int solution(int N) {
     // write your code in C99 (gcc 4.8.2)
