@@ -21,29 +21,27 @@ public class ListSorter {
 	}
 	
 	public void move(int from, int to) {
-		// No move if params the same.
-		if (from == to) {
-			return;
-		}
-		
+		System.out.println("Move " + from + ">" + to + " ");
 		printAirports(">ls");
+		System.out.println("Move " + from + ">" + to + " ");
 
-		// to is beyond airports.size
-		if (to > this.airports.size()) {
-			Airport fromAirport = this.airports.get(from);
-			this.airports.remove(from);
-			this.airports.add(fromAirport);
-			return;
+		Airport fromAirport = null;
+		if (from < to) {
+			fromAirport = this.airports.remove(from);
+			if (to > airports.size()) {
+				this.airports.add(fromAirport);
+			}
+			else {
+				this.airports.add(to, fromAirport);
+			}
 		}
-
-		Airport fromAirport = airports.get(from);
-		if (to > from) {
-			this.airports.add(to + 1, fromAirport);
-			airports.remove(from);
+		else if (to < from) {
+			fromAirport = this.airports.remove(from);
+			this.airports.add(to, fromAirport);
 		}
 		else {
-			this.airports.add(to + 1, fromAirport);
-			airports.remove(from+1);
+			// from == to
+			// do nothing
 		}
 		printAirports("<ls");
 	}
