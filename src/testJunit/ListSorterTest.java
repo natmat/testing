@@ -10,62 +10,62 @@ import org.junit.Test;
 
 public class ListSorterTest {
 	
-	private static ListSorter ls;
+	private static ListSorter uutListSorter;
 
 	@Before
 	public void setUpBefore() throws Exception {
-		ls = new ListSorter();
+		uutListSorter = new ListSorter();
 	}
 	
 	@After
 	public void closeAfter() {
-		ls.close();
+		uutListSorter.close();
 	}
 	
 	@Test
 	public void testSetup() {
-		assertEquals(8, ls.size());
+		assertEquals(8, uutListSorter.size());
 	}
 	
 	@Test
 	public void testMove0to0() {		
-		List<Airport> expect = ls.cloneAirports();
+		List<Airport> expect = uutListSorter.cloneAirports();
 		int from, to;
 		from = to = 0;
-		ls.move(from, to);
-		assertTrue(expect.equals(ls.cloneAirports()));
+		uutListSorter.move(from, to);
+		assertTrue(expect.equals(uutListSorter.cloneAirports()));
 	}
 
 	@Test
 	public void testMove0to1() {
-		List<Airport> expect = ls.cloneAirports();
+		List<Airport> expect = uutListSorter.cloneAirports();
 		int from = 0;
 		int to = 1;
 		this.setupExpect(expect, from, to);
-		ls.move(from, to);
-		assertTrue(expect.equals(ls.cloneAirports()));
+		uutListSorter.move(from, to);
+		assertTrue(expect.equals(uutListSorter.cloneAirports()));
 	}
 
 	@Test
 	public void testMove1to0() {		
-		List<Airport> expect = ls.cloneAirports();
+		List<Airport> expect = uutListSorter.cloneAirports();
 		int from = 1;
 		int to = 0;
 		setupExpect(expect, from, to);
 		
-		ls.move(from, to);
-		assertTrue(expect.equals(ls.cloneAirports()));
+		uutListSorter.move(from, to);
+		assertTrue(expect.equals(uutListSorter.cloneAirports()));
 	}
 
 	@Test
 	public void testMove1toEnd() {		
-		List<Airport> expect = ls.cloneAirports();
+		List<Airport> expect = uutListSorter.cloneAirports();
 		int from = 1;
 		int to = expect.size()-1; // end
 		Airport fromAirport = expect.remove(from);
 		expect.add(to, fromAirport);
-		ls.move(from, to);
-		assertTrue(expect.equals(ls.cloneAirports()));
+		uutListSorter.move(from, to);
+		assertTrue(expect.equals(uutListSorter.cloneAirports()));
 	}
 
 	private void setupExpect(final List<Airport> expect, int from, int to) {
@@ -76,26 +76,40 @@ public class ListSorterTest {
 
 	@Test
 	public void testMove1to4() {		
-		List<Airport> expect = ls.cloneAirports();
+		List<Airport> expect = uutListSorter.cloneAirports();
+		// before: 0,1,2,3,4,5,...
+		// after:  0,2,3,4,1,5,...
 		final int from = 1;
 		final int to = 4;
 		Airport fromAirport = expect.remove(from);
 		expect.add(to, fromAirport);
-		ls.move(from, to);
-		Airport.printAirports("expect", expect);
-		assertTrue(expect.equals(ls.cloneAirports()));
+		uutListSorter.move(from, to);
+		assertTrue(expect.equals(uutListSorter.cloneAirports()));
+	}
+
+	@Test
+	public void testMove4to1() {		
+		List<Airport> expect = uutListSorter.cloneAirports();
+		// before: 0,1,2,3,4,5,...
+		// after:  0,4,1,2,3,5,...
+		final int from = 4;
+		final int to = 1;
+		Airport fromAirport = expect.remove(from);
+		expect.add(to, fromAirport);
+		uutListSorter.move(from, to);
+		assertTrue(expect.equals(uutListSorter.cloneAirports()));
 	}
 
 	@Test
 	public void testMove1toBeyondEnd() {
-		List<Airport> expect = ls.cloneAirports();
+		List<Airport> expect = uutListSorter.cloneAirports();
 		int from = 1;
 		int to = expect.size() + 10;
 		// Special handling, can't use setupExpect() method
 		Airport fromAirport = expect.get(from);
 		expect.remove(from);
 		expect.add(fromAirport);
-		ls.move(from, to);
-		assertTrue(expect.equals(ls.cloneAirports()));
+		uutListSorter.move(from, to);
+		assertTrue(expect.equals(uutListSorter.cloneAirports()));
 	}
 }
