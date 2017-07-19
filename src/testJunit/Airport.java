@@ -28,8 +28,12 @@ public class Airport {
 	public static void printAirports(String info, List<Airport> clone) {
 		System.out.print(info + ": airport=");
 		for (Airport a : clone) {
-			System.out.print(a.getId() + " ");
+			System.out.print(a.getId() + "_" + a.getName() + " ");
 		}
 		System.out.println();
+	}
+
+	private String getName() {
+		return this.name;
 	}
 }

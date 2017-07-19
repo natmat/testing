@@ -23,7 +23,7 @@ public class ListSorterTest {
 	}
 	
 	@Test
-	public void testSetup() {
+	public void testAirportsSize() {
 		assertEquals(8, uutListSorter.size());
 	}
 	
