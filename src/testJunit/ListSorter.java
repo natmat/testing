@@ -1,6 +1,8 @@
 package testJunit;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListSorter {
@@ -21,10 +23,6 @@ public class ListSorter {
 	}
 	
 	public void move(int from, int to) {
-		System.out.println("Move " + from + ">" + to + " ");
-		printAirports(">ls");
-		System.out.println("Move " + from + ">" + to + " ");
-
 		Airport fromAirport = null;
 		if (from < to) {
 			fromAirport = this.airports.remove(from);
@@ -40,10 +38,8 @@ public class ListSorter {
 			this.airports.add(to, fromAirport);
 		}
 		else {
-			// from == to
-			// do nothing
+			// do nothing if from==to
 		}
-		printAirports("<ls");
 	}
 	
 	public List<Airport> cloneAirports() {
@@ -55,7 +51,7 @@ public class ListSorter {
 	}
 
 	public void printAirports(String s) {	
-		Airport.printAirports(s + ": ls", this.airports);
+		Airport.printAirports(s, this.airports);
 	}
 
 	public void close() {
